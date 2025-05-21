@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const libroSchema = new mongoose.Schema({
   nombre: String,
   autor: String,
-  editorial: String,
+  genero: String,
   imagen: {
     type: String,
     required: true,
   },
-  descripcion: String,
+  sinopsis: String,
   precio: Number,
   cantidad: Number,
   estado: String,
