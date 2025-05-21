@@ -9,7 +9,7 @@ import evento from './models/evento.js';
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: process.env.AUTENTICA_URI,
 };
 
 app.use(express.json());
@@ -25,6 +25,11 @@ mongoose
   .catch((err) => console.log('Error de conexión a la base de datos', err));
 
 // LIBROS
+app.get('/libros', async (req, res) => {
+  const libros = await libro.find();
+  res.json(libros);
+});
+
 app.post('/libros', async (req, res) => {
   try {
     const nuevoLibro = new libro(req.body);
@@ -38,13 +43,29 @@ app.post('/libros', async (req, res) => {
   }
 });
 
-app.get('/libros', async (req, res) => {
-  const libros = await libro.find();
-  res.json(libros);
+app.delete('/libros/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const libroEliminado = await libro.findByIdAndDelete(id);
+
+    if (!libroEliminado) {
+      return res.status(404).send('Libro no encontrado');
+    }
+
+    res.send(`Elemento con id ${id} fue eliminado`);
+  } catch (error) {
+    res.status(500).send('Error al eliminar');
+  }
 });
 // END
 
 // EVENTOS
+app.get('/eventos', async (req, res) => {
+  const eventos = await evento.find();
+  res.json(eventos);
+});
+
 app.post('/eventos', async (req, res) => {
   try {
     const nuevoEvento = new evento(req.body);
@@ -58,10 +79,6 @@ app.post('/eventos', async (req, res) => {
   }
 });
 
-app.get('/eventos', async (req, res) => {
-  const eventos = await evento.find();
-  res.json(eventos);
-});
 // END
 
 // SERVIDOR
