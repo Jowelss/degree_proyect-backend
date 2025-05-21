@@ -10,6 +10,8 @@ const libroSchema = new mongoose.Schema({
   },
   descripcion: String,
   precio: Number,
+  cantidad: Number,
+  estado: String,
 });
 
 export default mongoose.model('Libro', libroSchema);
