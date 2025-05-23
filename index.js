@@ -79,6 +79,21 @@ app.post('/eventos', async (req, res) => {
   }
 });
 
+app.delete('/eventos/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const eventoEliminado = await evento.findByIdAndDelete(id);
+
+    if (!eventoEliminado) {
+      return res.status(404).send('Libro no encontrado');
+    }
+
+    res.send(`Elemento con id ${id} fue eliminado`);
+  } catch (error) {
+    res.status(500).send('Error al eliminar');
+  }
+});
 // END
 
 // SERVIDOR
