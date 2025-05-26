@@ -86,7 +86,7 @@ app.delete('/eventos/:id', async (req, res) => {
     const eventoEliminado = await evento.findByIdAndDelete(id);
 
     if (!eventoEliminado) {
-      return res.status(404).send('Libro no encontrado');
+      return res.status(404).send('Evento no encontrado');
     }
 
     res.send(`Elemento con id ${id} fue eliminado`);
