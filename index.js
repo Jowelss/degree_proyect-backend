@@ -58,6 +58,25 @@ app.delete('/libros/:id', async (req, res) => {
     res.status(500).send('Error al eliminar');
   }
 });
+
+app.patch('/libros/:id', async (req, res) => {
+  const id = req.params.id;
+  const datosLibros = req.body;
+
+  try {
+    const libroActualizado = await libro.findByIdAndUpdate(id, datosLibros, {
+      new: true,
+    });
+
+    if (!libroActualizado) {
+      return res.status(404).send('Libro no encontrado');
+    }
+
+    res.json(libroActualizado);
+  } catch (error) {
+    res.status(500).send('Error al actualizar el libro');
+  }
+});
 // END
 
 // EVENTOS
