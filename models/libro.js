@@ -11,7 +11,8 @@ const libroSchema = new mongoose.Schema({
   sinopsis: String, // ¿De que trata?
   precio: Number, // Inversion
   estado: String, // Disponibles - Agotado
-  formato: String, // ¿Como es este ejemplar?
+  tapa: String, // ¿Como es este ejemplar?
+  hoja: String, // ¿Como es este ejemplar?
 });
 
 export default mongoose.model('Libro', libroSchema);
