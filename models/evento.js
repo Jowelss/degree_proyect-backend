@@ -2,10 +2,7 @@ import mongoose from 'mongoose';
 
 const eventoSchema = new mongoose.Schema({
   nombre: String,
-  imagen: {
-    type: String,
-    required: true,
-  },
+  imagen: String,
   descripcion: String,
   fecha: Date,
   ubicacion: String,
