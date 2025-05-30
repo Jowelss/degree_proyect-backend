@@ -24,96 +24,63 @@ mongoose
   .then(() => console.log('Conectado a la base de datos'))
   .catch((err) => console.log('Error de conexión a la base de datos', err));
 
-// LIBROS
-app.get('/libros', async (req, res) => {
-  const libros = await libro.find();
-  res.json(libros);
-});
+const crearRutasCrud = (app, modelo, rutaBase) => {
+  app.get(rutaBase, async (req, res) => {
+    const elemento = await modelo.find();
+    res.json(elemento);
+  });
 
-app.post('/libros', async (req, res) => {
-  try {
-    const nuevoLibro = new libro(req.body);
-    await nuevoLibro.save();
+  app.post(rutaBase, async (req, res) => {
+    try {
+      const nuevoElemento = new modelo(req.body);
+      await nuevoElemento.save();
 
-    res.status(201).send('Libro guardado');
-  } catch (error) {
-    res.status(400).send('Error al guardar el libro');
+      res.status(201).send('Libro guardado');
+    } catch (error) {
+      res.status(400).send('Error al guardar el libro');
 
-    console.log(error);
-  }
-});
-
-app.delete('/libros/:id', async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const libroEliminado = await libro.findByIdAndDelete(id);
-
-    if (!libroEliminado) {
-      return res.status(404).send('Libro no encontrado');
+      console.log(error);
     }
+  });
 
-    res.send(`Elemento con id ${id} fue eliminado`);
-  } catch (error) {
-    res.status(500).send('Error al eliminar');
-  }
-});
+  app.delete(`${rutaBase}/:id`, async (req, res) => {
+    const id = req.params.id;
 
-app.patch('/libros/:id', async (req, res) => {
-  const id = req.params.id;
-  const datosLibros = req.body;
+    try {
+      const elementoEliminado = await modelo.findByIdAndDelete(id);
 
-  try {
-    const libroActualizado = await libro.findByIdAndUpdate(id, datosLibros, {
-      new: true,
-    });
+      if (!elementoEliminado) {
+        return res.status(404).send('Libro no encontrado');
+      }
 
-    if (!libroActualizado) {
-      return res.status(404).send('Libro no encontrado');
+      res.send(`Elemento con id ${id} fue eliminado`);
+    } catch (error) {
+      res.status(500).send('Error al eliminar');
     }
+  });
 
-    res.json(libroActualizado);
-  } catch (error) {
-    res.status(500).send('Error al actualizar el libro');
-  }
-});
-// END
+  app.patch(`${rutaBase}/:id`, async (req, res) => {
+    const id = req.params.id;
+    const elemento = req.body;
 
-// EVENTOS
-app.get('/eventos', async (req, res) => {
-  const eventos = await evento.find();
-  res.json(eventos);
-});
+    try {
+      const elementoActualizado = await modelo.findByIdAndUpdate(id, elemento, {
+        new: true,
+      });
 
-app.post('/eventos', async (req, res) => {
-  try {
-    const nuevoEvento = new evento(req.body);
-    await nuevoEvento.save();
+      if (!elementoActualizado) {
+        return res.status(404).send('Libro no encontrado');
+      }
 
-    res.status(201).send('Evento agregado');
-  } catch (error) {
-    console.log(error);
-
-    res.status(400).send('Error al guardar el super evento');
-  }
-});
-
-app.delete('/eventos/:id', async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const eventoEliminado = await evento.findByIdAndDelete(id);
-
-    if (!eventoEliminado) {
-      return res.status(404).send('Evento no encontrado');
+      res.json(elementoActualizado);
+    } catch (error) {
+      res.status(500).send('Error al actualizar el libro');
     }
+  });
+};
 
-    res.send(`Elemento con id ${id} fue eliminado`);
-  } catch (error) {
-    res.status(500).send('Error al eliminar');
-  }
-});
-// END
+crearRutasCrud(app, libro, '/libros');
+crearRutasCrud(app, evento, '/eventos');
 
 // SERVIDOR
 const PORT = process.env.PORT || 5000;
