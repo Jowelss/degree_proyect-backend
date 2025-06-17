@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 import libro from './models/libro.js';
 import evento from './models/evento.js';
+import post from './models/post.js';
 
 const app = express();
 
@@ -81,6 +82,7 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
 
 crearRutasCrud(app, libro, '/libros');
 crearRutasCrud(app, evento, '/eventos');
+crearRutasCrud(app, post, '/posts');
 
 // SERVIDOR
 const PORT = process.env.PORT || 5000;
