@@ -7,6 +7,7 @@ const eventoSchema = new mongoose.Schema({
   fecha: Date,
   ubicacion: String,
   hora: String,
+  cupos: Number,
 });
 
 export default mongoose.model('Evento', eventoSchema);
