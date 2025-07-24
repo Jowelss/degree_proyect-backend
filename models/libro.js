@@ -7,6 +7,7 @@ const libroSchema = new mongoose.Schema({
   imagen: String, // Imagen
   sinopsis: String, // ¿De que trata?
   precio: Number, // Inversion
+  cantidad: Number, // Cantidad de libros
   estado: String, // Disponibles - Agotado
   tapa: String, // ¿Como es este ejemplar?
   hoja: String, // ¿Como es este ejemplar?
