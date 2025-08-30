@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const eventoSchema = new mongoose.Schema({
+const qrSchema = new mongoose.Schema({
   imagen: String,
 });
 
-export default mongoose.model('QR', eventoSchema);
+export default mongoose.model('Qr', qrSchema);
