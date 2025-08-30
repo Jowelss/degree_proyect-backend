@@ -84,7 +84,7 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
 crearRutasCrud(app, libro, '/libros');
 crearRutasCrud(app, evento, '/eventos');
 crearRutasCrud(app, post, '/posts');
-crearRutasCrud(app, qr), '/qr';
+crearRutasCrud(app, qr, '/qr');
 
 // SERVIDOR
 const PORT = process.env.PORT || 5000;
