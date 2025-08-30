@@ -37,9 +37,9 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
       const nuevoElemento = new modelo(req.body);
       await nuevoElemento.save();
 
-      res.status(201).send('Libro guardado');
+      res.status(201).send('Elemento guardado');
     } catch (error) {
-      res.status(400).send('Error al guardar el libro');
+      res.status(400).send('Error al guardar el elemento');
 
       console.log(error);
     }
@@ -52,7 +52,7 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
       const elementoEliminado = await modelo.findByIdAndDelete(id);
 
       if (!elementoEliminado) {
-        return res.status(404).send('Libro no encontrado');
+        return res.status(404).send('Elemento no encontrado');
       }
 
       res.send(`Elemento con id ${id} fue eliminado`);
@@ -71,12 +71,12 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
       });
 
       if (!elementoActualizado) {
-        return res.status(404).send('Libro no encontrado');
+        return res.status(404).send('Elemento no encontrado');
       }
 
       res.json(elementoActualizado);
     } catch (error) {
-      res.status(500).send('Error al actualizar el libro');
+      res.status(500).send('Error al actualizar el elemento');
     }
   });
 };
