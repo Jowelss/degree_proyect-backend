@@ -7,6 +7,7 @@ import libro from './models/libro.js';
 import evento from './models/evento.js';
 import post from './models/post.js';
 import qr from './models/qr.js';
+import orden from './models/orden.js';
 
 const app = express();
 
@@ -85,6 +86,7 @@ crearRutasCrud(app, libro, '/libros');
 crearRutasCrud(app, evento, '/eventos');
 crearRutasCrud(app, post, '/posts');
 crearRutasCrud(app, qr, '/qr');
+crearRutasCrud(app, orden, '/orden');
 
 // SERVIDOR
 const PORT = process.env.PORT || 5000;
