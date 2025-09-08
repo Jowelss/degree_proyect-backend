@@ -12,7 +12,7 @@ const ordenSchema = new mongoose.Schema({
     },
   ],
 
-  comprobante: String,
+  voucher: String,
   total: Number,
 });
 
