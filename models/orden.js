@@ -9,10 +9,10 @@ const ordenSchema = new mongoose.Schema({
       nombre: String,
       precio: Number,
       cantidad: Number,
-      comprobante: String,
     },
   ],
 
+  comprobante: String,
   total: Number,
 });
 
