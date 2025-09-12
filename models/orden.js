@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const itemsSchema = new mongoose.Schema({
   libroId: { type: mongoose.Schema.Types.ObjectId, ref: 'Libro' },
+  imagen: String,
   nombre: String,
   precio: Number,
   cantidad: Number,
