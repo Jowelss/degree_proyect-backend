@@ -14,6 +14,9 @@ const ordenSchema = new mongoose.Schema({
   items: [itemsSchema],
 
   voucher: String,
+  nombre: String,
+  telefono: String,
+  email: String,
   total: Number,
 });
 
