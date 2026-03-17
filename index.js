@@ -9,6 +9,7 @@ import post from './models/post.js';
 import qr from './models/qr.js';
 import orden from './models/orden.js';
 import sesion from './models/sesion.js';
+import { enviarCorreo } from './services/sendEmail.js';
 
 const app = express();
 
@@ -38,6 +39,10 @@ const crearRutasCrud = (app, modelo, rutaBase) => {
     try {
       const nuevoElemento = new modelo(req.body);
       await nuevoElemento.save();
+
+      if (rutaBase === '/orden') {
+        await enviarCorreo(nuevoElemento);
+      }
 
       res.status(201).send('Elemento guardado');
     } catch (error) {
@@ -93,6 +98,6 @@ crearRutasCrud(app, sesion, '/sesion');
 // SERVIDOR
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`Servidor Jowelss corriendo en el puerto  ${PORT}`);
 });
 // END
