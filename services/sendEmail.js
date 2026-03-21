@@ -18,7 +18,7 @@ export async function enviarCorreo(data) {
       <td style="padding:8px; border:1px solid #ddd; text-align:center;">${item.cantidad}</td>
       <td style="padding:8px; border:1px solid #ddd; text-align:right;">${item.precio}</td>
        <td style="padding:8px; border:1px solid #ddd; text-align:right;">
-        $${item.precio * item.cantidad}
+        Bs${item.precio * item.cantidad}
       </td>
     </tr>
   `,
@@ -26,7 +26,7 @@ export async function enviarCorreo(data) {
     .join('');
 
   const mailOptions = {
-    from: 'syufdskjfdksl@gmail.com',
+    from: data.email,
     to: process.env.GMAIL_USER,
     subject: '🛒 Nueva compra realizada',
     html: `
